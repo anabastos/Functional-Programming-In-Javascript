@@ -3,9 +3,8 @@
 
 Na Computação _Funções de Alta Ordem_ também conhecidas como _Funções de Primeira Classe_
 são funções que suportam a passagem de outras funções como argumentos retornando como valor para outras funções.
-Em outras palavras São funções que operam em outras funções, seja levando-os como argumentos ou devolvendo-os. 
-
-Em linguagens funcionais, bem como em ES6 é possivel atribuir essas funções a variaveis `var` ou `let`ou ainda a constantes `const`
+Em outras palavras, são funções que operam em outras funções, seja levando-os como argumentos ou devolvendo-os.
+É possivel atribuir essas funções a variaveis `var` ou `let`ou ainda a constantes `const`
 
 
 ```javascript
