@@ -1,25 +1,31 @@
 # Calculo Lambda
 
-Calculo lambda é um sistema formal pra representar computações baseado na definicao e aplicacao de funcoes e nele:
+Calculo lambda é um sistema formal pra representar computações baseado na definicao e aplicacao de funções e nele:
 - Todas as funcoes sao anonimas
-- Todas as funções objetos de ordem elevada, ou seja, podem ser passadas como argumentos e retornadas como funções.
+- Todas as funções objetos de ordem elevada(ou *high order functions*), ou seja, funções podem ser passadas como argumentos de outras funções e também serem retorno de funções.
 - Permite a combinação de operadores e funções básiacas na geração de operadores mais complexos;
 - Pode ser tipada ou não
 
 Alonzo Church inventou o calculo lambda nos anos 30 com o intuito de formalizar a matemática através da noção de funções ao invés da teoria de conjuntos sendo uma representação equivalente á maquina de Turing porém representando computacoes através funções ao inves de maquinas e teve um impacto forte na computação por ser a forma teoria de especificar e implementar linguagens de programação baseadas em funções, aka. linguagens funcionais.
+Em 1937 Alan Turing provou a equivalencia entre uma maquina de turing e o calculo lambda em termos de computabilidade, sendo assim, a ferramenta mais adequada para escrever linguagens de paradigma funcional. Nesse paradigma, a solução de um problema é a feita por meio de funções, usando nessa implementação um conjunto de primitivas e regras para construir essas primitivas.
+
+Dentre seus aspectos interessantes há facilidade sintatica para lidar com computações, e uma facilidade de escrever recursão
+`exemplo`
+A maioria das linguagens da programação funcional são semelhantes e diferem somente em aspectos sintaticos
+
 
 Sendo assim modelo matematico para
-- Especificacao e implementacao de linguagens funcionais.
+- Especificacao e implementacao de linguagens funcionais(Haskell, Lisp, Orwell).
 - Representacao de funções computaveis.
 - Teoria da Computabilidade.
 - Teoria dos tipos.
 - Teoria das provas.
 
-###Sintaxe
+### Sintaxe
 
-- O símbolo λ define uma função
-- O símbolo . separa os parâmetros do resultado.
-- ((MN)L) pode ser escrita MNL por ter precedencia e esquerda.
+- O símbolo λ define uma função.
+- O símbolo . separa o a cabeça do corpo, sendo a cabeça uma representação do parâmetro e da expressão.
+- Precedencia e esquerda, ou seja ((MN)L) pode ser escrita MNL.
 - Letras diferentes designam variaveis diferentes
 
 Temos então:
@@ -95,7 +101,7 @@ E aplicando o par "a" e "b" temos:
           = a − b
  ```
 
- Em javascript podemos representar a aplicação parcial de argumentos usando o curry da biblioteca *RamdaJS*:
+ Em javascript podemos representar a aplicação parcial de argumentos usando o curry da biblioteca *RamdaJS*, lembrando que vamos ver mais profundamente sobre currying e ramda com o passar do livro:
 ```javascript
 const h =  curry((x, y) -> x + y)
 h(a)(b) // a + b
@@ -272,19 +278,7 @@ Agora considere o termo:
 - z, v e w são livres.
 - Logo, F V (P) = {x, z, v, w}; x, nesse caso, é uma variável ligada e também livre de P .
 
-## Substituições
-
-Para todo M, N, x, [N/x]M é definido como o resultado da substituição de toda ocorrênia livre de x em M por N.
-
-- [N/x]x ≡ N ;
-- [N/x]a ≡ a, para todo átomo a !≡ x;
-- [N/x] (PQ) ≡ ([N/x]P[N/x]Q);
-- [N/x] (λx.P) ≡ λx.P ;
-- [N/x] (λy.P) ≡ λy.P , se x /∈ F V (P);
-- [N/x] (λy.P) ≡ λy.[N/x]P , se x ∈ F V (P) e y /∈ F V (N);
-- [N/x] (λy.P) ≡ λz.[N/x][z/y]P , se x ∈ FV(P) e y ∈ FV(N).
-
-### Exemplo de substituicões
+Um exemplo de substituição seria: 
 
 ```
 [(λy.xy)/x](λy.x(λx.x))
@@ -328,24 +322,9 @@ Para todos P, Q e R:
 
 ### Redução β (aplicação)
 
-A aplicação de um argumento à uma abstração lambda implica na substituição das ocorrências das variáveis correspondentes ao argumento. Sendo que funções também podem ser passadas como algumentos
+Podemos interpretar no javascript como a aplicação de um argumento em uma função.
 
-Um termo da forma:
-
-`(λx.M)N`
-é chamado β-redex, e o termo correspondente: 
-
-`[N/x]M`
-
-é chamado o seu contrato.
-
-Se um termo P contém uma ocorrênia de (λx.M)N e a mesma é substituída por [N/x]M , gerando P, diz-se que a ocorrênia redex em P foi contraída e que P β-contrai para P
-Denotado:
-
-`P ⊲1β P`
-
-
-#### Exemplo de Redução β
+A aplicação de um argumento à uma abstração lambda implica na substituição das ocorrências das variáveis correspondentes ao argumento. Sendo que funções também podem ser passadas como argumentos. sendo exemplificado como:
 
 `λx.y.((λx.x - 3)(y) + x)(5)(6)`
 `λy.((λx.x - 3)(y) + 5)(6)`
@@ -354,19 +333,6 @@ Denotado:
 `8`
  
 Observe que o x mais interno não foi substituido na primeira redução, pois estava protegido pelo seu x ligado, já o primeiro x substituiu por 6 apenas seu x ligado.
-
-
-`(λx.x(xy))N ⊲1β N(Ny)`
-
-`(λx.y)N ⊲1β y`
-
-```
-(λx.xxy)(λx.xxy) ⊲1β (λx.xxy)(λx.xxy)y
-                ⊲1β (λx.xxy)(λx.xxy)yy
-                ⊲1β (λx.xxy)(λx.xxy)yyy
-                ⊲1β (λx.xxy)(λx.xxy)yyyy
-                etc.
-```
 
 ## Forma Normal 
 
