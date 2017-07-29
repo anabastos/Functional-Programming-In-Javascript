@@ -15,6 +15,7 @@ De uma forma mais suscinta Teoria das categorias é sobre como nosso cerebro tra
 Categorias ainda sao conjuntos com o mesmo tipo. Em javascript eles sao arrays ou objetos que contem variaveis que sao explicitamente declaradas como numbers, strings, booleans, Dates, Nós.
 
 __*Morfismos*__ são funções puras, que dada uma entrada sempre retornam a mesma saida.
+
 __*Operações Homomorficas*__ podem operar sobre varias categorias.
 
 Teoria das categorias nos diz que quando temos 2 morfismos onde a categoria da primeira função é a entrada esperada de outra entao elas podem ser compostas. Teoria das categorias possui necessariamente 2 coisas:
