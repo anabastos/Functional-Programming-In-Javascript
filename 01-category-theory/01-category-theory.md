@@ -12,6 +12,16 @@ fonte _f_ = A e o alvo _f_ = B   sempre _f_: A → B.
 De uma forma mais suscinta Teoria das categorias é sobre como nosso cerebro trabalha com informações, "teoria das categorias é sobre conectar pontos"
 
 ## Terminologia
-Categorias ainda sao conjuntos com o mesmo tipo. Em javascript eles sao Arrays ou objetos que contem variaveis que sao explicitamente declaradas como numbers, strings, booleans, Dates, Nós.
+Categorias ainda sao conjuntos com o mesmo tipo. Em javascript eles sao arrays ou objetos que contem variaveis que sao explicitamente declaradas como numbers, strings, booleans, Dates, Nós.
 
 __*Morfismos*__ são funções puras, que dada uma entrada sempre retornam a mesma saida.
+__*Operações Homomorficas*__ podem operar sobre varias categorias.
+
+Teoria das categorias nos diz que quando temos 2 morfismos onde a categoria da primeira função é a entrada esperada de outra entao elas podem ser compostas. Teoria das categorias possui necessariamente 2 coisas:
+ - 1 Objetos(em Javascript sao conhecidos como Tipos)
+ - 2 Morfismos(em Javascript sao funções puras que so trabalham com tipos).
+ Porem é necessario uma definicao mais precisa.
+
+ *Objetos* em teorias das categorias sao mais como variaveis com tipos explicitos de dados e nao como coleções de propriedades como define Javascript
+ *Morfismos* são funções puras que usam esses tipos.
+ Usar teoria das categorias em javascript significa trabalhar um certo tipo por categoria. Tipos de dados sao numeros
