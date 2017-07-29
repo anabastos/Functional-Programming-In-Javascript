@@ -24,5 +24,6 @@ Teoria das categorias nos diz que quando temos 2 morfismos onde a categoria da p
  Porem é necessario uma definicao mais precisa.
 
  *Objetos* em teorias das categorias sao mais como variaveis com tipos explicitos de dados e nao como coleções de propriedades como define Javascript
+
  *Morfismos* são funções puras que usam esses tipos.
  Usar teoria das categorias em javascript significa trabalhar um certo tipo por categoria. Tipos de dados sao numeros
