@@ -13,7 +13,6 @@ Dentre seus aspectos interessantes há facilidade sintatica para lidar com compu
 `exemplo`
 A maioria das linguagens da programação funcional são semelhantes e diferem somente em aspectos sintaticos
 
-
 Sendo assim modelo matematico para
 - Especificacao e implementacao de linguagens funcionais(Haskell, Lisp, Orwell).
 - Representacao de funções computaveis.
