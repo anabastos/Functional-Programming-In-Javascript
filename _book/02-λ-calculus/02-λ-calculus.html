@@ -1,0 +1,609 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Lambda Calculus · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../03-pure-functions/03-pure-functions.html" />
+    
+    
+    <link rel="prev" href="../01-category-theory/01-category-theory.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Modern Javascript Functional Book</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Sumário
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../00-introduction/00-introduction.html">
+            
+                <a href="../00-introduction/00-introduction.html">
+            
+                    
+                    Introdução
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../01-category-theory/01-category-theory.html">
+            
+                <a href="../01-category-theory/01-category-theory.html">
+            
+                    
+                    Teoria das Categorias
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="02-λ-calculus.html">
+            
+                <a href="02-λ-calculus.html">
+            
+                    
+                    Lambda Calculus
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../03-pure-functions/03-pure-functions.html">
+            
+                <a href="../03-pure-functions/03-pure-functions.html">
+            
+                    
+                    Funções Puras
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../04-higher-order-functions/04-higher-order-functions.html">
+            
+                <a href="../04-higher-order-functions/04-higher-order-functions.html">
+            
+                    
+                    Funções de primeira ordem
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../05-functional-methods-with-arrays/05-functional-methods-with-arrays.html">
+            
+                <a href="../05-functional-methods-with-arrays/05-functional-methods-with-arrays.html">
+            
+                    
+                    Metodos funcionais de arrays
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../06- currying-vs-partial-application/06- currying-vs-partial-application.html">
+            
+                <a href="../06- currying-vs-partial-application/06- currying-vs-partial-application.html">
+            
+                    
+                    Currying vs Aplicação Parcial
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../07- composition-and-pipelines/07- composition-and-pipelines.html">
+            
+                <a href="../07- composition-and-pipelines/07- composition-and-pipelines.html">
+            
+                    
+                    Composição e pipeline
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../08-functors/08-functors.html">
+            
+                <a href="../08-functors/08-functors.html">
+            
+                    
+                    Funtores
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../09-monads/09-monads.html">
+            
+                <a href="../09-monads/09-monads.html">
+            
+                    
+                    Monadas
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Lambda Calculus</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="calculo-lambda">Calculo Lambda</h1>
+<p>Calculo lambda &#xE9; um sistema formal pra representar computa&#xE7;&#xF5;es baseado na definicao e aplicacao de fun&#xE7;&#xF5;es e nele:</p>
+<ul>
+<li>Todas as funcoes sao anonimas</li>
+<li>Todas as fun&#xE7;&#xF5;es objetos de ordem elevada(ou <em>high order functions</em>), ou seja, fun&#xE7;&#xF5;es podem ser passadas como argumentos de outras fun&#xE7;&#xF5;es e tamb&#xE9;m serem retorno de fun&#xE7;&#xF5;es.</li>
+<li>Permite a combina&#xE7;&#xE3;o de operadores e fun&#xE7;&#xF5;es b&#xE1;siacas na gera&#xE7;&#xE3;o de operadores mais complexos;</li>
+<li>Pode ser tipada ou n&#xE3;o</li>
+</ul>
+<p>Alonzo Church inventou o calculo lambda nos anos 30 com o intuito de formalizar a matem&#xE1;tica atrav&#xE9;s da no&#xE7;&#xE3;o de fun&#xE7;&#xF5;es ao inv&#xE9;s da teoria de conjuntos sendo uma representa&#xE7;&#xE3;o equivalente &#xE1; maquina de Turing por&#xE9;m representando computacoes atrav&#xE9;s fun&#xE7;&#xF5;es ao inves de maquinas e teve um impacto forte na computa&#xE7;&#xE3;o por ser a forma teoria de especificar e implementar linguagens de programa&#xE7;&#xE3;o baseadas em fun&#xE7;&#xF5;es, aka. linguagens funcionais.
+Em 1937 Alan Turing provou a equivalencia entre uma maquina de turing e o calculo lambda em termos de computabilidade, sendo assim, a ferramenta mais adequada para escrever linguagens de paradigma funcional. Nesse paradigma, a solu&#xE7;&#xE3;o de um problema &#xE9; a feita por meio de fun&#xE7;&#xF5;es, usando nessa implementa&#xE7;&#xE3;o um conjunto de primitivas e regras para construir essas primitivas.</p>
+<p>Dentre seus aspectos interessantes h&#xE1; facilidade sintatica para lidar com computa&#xE7;&#xF5;es, e uma facilidade de escrever recurs&#xE3;o
+<code>exemplo</code>
+A maioria das linguagens da programa&#xE7;&#xE3;o funcional s&#xE3;o semelhantes e diferem somente em aspectos sintaticos</p>
+<p>Sendo assim modelo matematico para</p>
+<ul>
+<li>Especificacao e implementacao de linguagens funcionais(Haskell, Lisp, Orwell).</li>
+<li>Representacao de fun&#xE7;&#xF5;es computaveis.</li>
+<li>Teoria da Computabilidade.</li>
+<li>Teoria dos tipos.</li>
+<li>Teoria das provas.</li>
+</ul>
+<h3 id="sintaxe">Sintaxe</h3>
+<ul>
+<li>O s&#xED;mbolo &#x3BB; define uma fun&#xE7;&#xE3;o.</li>
+<li>O s&#xED;mbolo . separa o a cabe&#xE7;a do corpo, sendo a cabe&#xE7;a uma representa&#xE7;&#xE3;o do par&#xE2;metro e da express&#xE3;o.</li>
+<li>Precedencia e esquerda, ou seja ((MN)L) pode ser escrita MNL.</li>
+<li>Letras diferentes designam variaveis diferentes</li>
+</ul>
+<p>Temos ent&#xE3;o:</p>
+<pre><code>  &#x3BB;x   .   x + 1   (a)
+(head)    (body)  (outra expressao)
+         express&#xE3;o
+</code></pre><p>Sendo a cabe&#xE7;a <code>&#x3BB;x</code> consistindo no lambda, definindo a fun&#xE7;&#xE3;o, os seus parametros formais(<code>x</code>) e o corpo a express&#xE3;o <code>x + y</code>
+Tal exeplo pode ser lido como &quot;Fun&#xE7;&#xE3;o que recebe <code>x</code> a qual adiciona x a 1&quot;.</p>
+<p>Considere x + y.
+Ela pode ser formalizada na nota&#xE7;&#xE3;o matematica casualmente atravez de funcoes de um unico paramento</p>
+<p><code>f(x) = x + y</code> ou
+<code>g(y) = x + y</code></p>
+<p>Em javascript:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> f =  x -&gt; x + y
+<span class="hljs-keyword">const</span> g = y -&gt; x + y
+</code></pre>
+<p>Exemplo:</p>
+<p><code>f(0): 0 + y</code>
+<code>f(1): 1 + y</code></p>
+<p>Representacao dessas funcoes na linguagem lambda:</p>
+<p><code>f = &#x3BB;x.x + y</code>
+<code>g = &#x3BB;y.x + y</code></p>
+<p>Sendo assim, <code>&#x3BB;x.x + y</code> &#xE9; equivalenta a fun&#xE7;&#xE3;o identidade <code>f(x)=x + y</code></p>
+<p>E sua aplica&#xE7;&#xE3;o:</p>
+<p><code>(&#x3BB;x.x + y)(0) = 0 + y</code> ou
+<code>(&#x3BB;x.x + y)(1) = 1 + y.</code></p>
+<p>Aplicando &#x3BB;x.x + y no n&#xFA;mero 0 obtemos <code>(&#x3BB;x.x + y)(0)</code> (tamb&#xE9;m escrito como &#x3BB;x.x 0), que resulta na substitui&#xE7;&#xE3;o de x para 0 e assim retornando 0 + y, ou y.  </p>
+<p>Funcoes de multiplos paramentos podem ser representados em linguagem lambda como:</p>
+<p><code>h(x, y) = x + y</code> ou
+<code>k(y, x) = x + y</code></p>
+<p>E sua aplica&#xE7;&#xE3;o:</p>
+<p><code>h = &#x3BB;xy.x + y</code> ou
+<code>k = &#x3BB;yx.x + y.</code></p>
+<p>Por&#xE9;m essas funcoes podem ser representadas como fun&#xE7;&#xF5;es que retornam outras fun&#xE7;&#xF5;es como valores, ja que todo 
+calculo lambda recebe apenas um &#xFA;nico parametro.</p>
+<p><code>h = &#x3BB;x.(&#x3BB;y.(x + y))</code></p>
+<p>Em que ao aplicamos &quot;a&quot; temos:</p>
+<pre><code>h(a) = (&#x3BB;x.(&#x3BB;y.(x + y))(a) 
+     = &#x3BB;y.(a + y)
+</code></pre><p>E aplicando o par &quot;a&quot; e &quot;b&quot; temos:</p>
+<pre><code>(h(a))(b) = ((&#x3BB;x.(&#x3BB;y.(x + y))(a))(b)
+          = (&#x3BB;y.(a + y))(b)
+          = a &#x2212; b
+</code></pre><p> Em javascript podemos representar a aplica&#xE7;&#xE3;o parcial de argumentos usando o curry da biblioteca <em>RamdaJS</em>, lembrando que vamos ver mais profundamente sobre currying e ramda com o passar do livro:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> h =  curry((x, y) -&gt; x + y)
+h(a)(b) <span class="hljs-comment">// a + b</span>
+</code></pre>
+<h3 id="exemplo">Exemplo</h3>
+<p>Para exemplificar vamos definir duas fun&#xE7;&#xF5;es representando True e False, em que a T retorna o seu primeiro valor e F retorna o seu segundo valor</p>
+<p><code>T &#x2261; &#x3BB;ab.a   F &#x2261; &#x3BB;ab.b</code></p>
+<p>Sendo aplicada parcialmente:</p>
+<p><code>T &#x2261; &#x3BB;a.&#x3BB;b.a</code></p>
+<p>Em javascript:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> t = curry((a, b) =&gt; a)
+<span class="hljs-keyword">const</span> f = curry((a, b) =&gt; b)
+<span class="hljs-keyword">const</span> display = (boleano) =&gt; boleano(<span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>)
+
+display(t) <span class="hljs-comment">//true</span>
+display(f) <span class="hljs-comment">//false</span>
+</code></pre>
+<p>J&#xE1; conseguimos sinalizar se algo &#xE9; verdadeiro ou falso a partir de calculo lambda apenas aplicando a fun&#xE7;&#xE3;o display(t) ou display(f).
+No nosso exemplo, um booleano &#xE9; uma fun&#xE7;&#xE3;o, mas como fariamos uma nega&#xE7;&#xE3;o?</p>
+<p><code>NOT &#x2261; &#x3BB;x.xFT</code></p>
+<p>NOT &#xE9; uma fun&#xE7;&#xE3;o que recebe um booleano e retorna a aplica&#xE7;&#xE3;o do booleano nos parametros F e T.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> not = x =&gt; x(F, T)
+
+display(not(t))
+</code></pre>
+<p>O AND e OR recebem dois booleanos, o AND aplica o primeiro a em b e F(fun&#xE7;&#xE3;o false) e o or aplica o primeiro a em t(fun&#xE7;&#xE3;o true) e b.</p>
+<p><code>AND &#x2261; &#x3BB;ab.abF</code>
+<code>OR &#x2261; &#x3BB;ab.aTb.</code></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> and = curry((a, b) =&gt; a(b , f))
+<span class="hljs-keyword">const</span> or = curry((a, b) =&gt; a(t, b))
+
+display(and(t)(f)) <span class="hljs-comment">//false</span>
+display(and(t)(t)) <span class="hljs-comment">//true</span>
+display(or(t)(f)) <span class="hljs-comment">//true</span>
+display(not(or(t)(f))) <span class="hljs-comment">// false</span>
+display(not(and(t)(or(t)(f)))) <span class="hljs-comment">//false</span>
+</code></pre>
+<p>E em Scheme, o dialeto LISP criado por Guy Steele ficamos mais pr&#xF3;ximo ainda da sintaxe do c&#xE1;lculo lambda:</p>
+<pre><code class="lang-s">(define T (lambda (a b) a))
+(define F (lambda (a b) b))
+(define NOT (lambda (x) (x F T)))
+(define AND (lambda (b1 b2) (b1 b2 F)))
+(define OR (lambda (b1 b2) (b1 T b2)))
+</code></pre>
+<p>Exemplo sensacional pego (daqui)[<a href="http://blog.caelum.com.br/comecando-com-o-calculo-lambda-e-a-programacao-funcional-de-verdade/" target="_blank">http://blog.caelum.com.br/comecando-com-o-calculo-lambda-e-a-programacao-funcional-de-verdade/</a>] e transformado em JS</p>
+<h2 id="fun&#xE7;&#xF5;es-comput&#xE1;veis">Fun&#xE7;&#xF5;es Comput&#xE1;veis</h2>
+<p>No C&#xE1;lulo Lambda, diz-se que uma fun&#xE7;&#xE3;o F : N &#x2192; N &#xE9; comput&#xE1;vel se e somente se existir uma express&#xE3;o-lambda f tal que:</p>
+<p><code>&#x2200;x, y &#x2208; N, F(x) = y &#x21D4; f x = &#x3B2; y</code></p>
+<p>&#x3B2; &#xE9; chamada <em>igualdade beta</em>, serve para estabelecer a equival&#xEA;nia entre termos de uma equa&#xE7;&#xE3;o envolvendo termos lambda</p>
+<p>&#x3BB;-termo ou express&#xE3;o lambda &#xE9; definida de forma indutiva sobre um conjunto de identificadores {x, y, z, u, v...}, sendo esses identificadores representa&#xE7;&#xF5;es de variaveis:
+Sendo assim uma vari&#xE1;vel (tamb&#xE9;m chamada <em>&#xE1;tomo</em>) &#xE9; um &#x3BB;-termo.</p>
+<p>A linguagem lambda &#xE9; composta de todos os &#x3BB;-termos que podem ser constru&#xED;dos sobre um certo conjunto de identificadores e trata-se de uma linguagem om apenas dois operadores ou comandos: <strong>aplica&#xE7;&#xE3;o de fun&#xE7;&#xE3;o
+&#xE0; argumentos (chamada de fun&#xE7;&#xE3;o) e abstra&#xE7;&#xE3;o (defini&#xE7;&#xE3;o de fun&#xE7;&#xE3;o).</strong></p>
+<p><strong>Aplica&#xE7;&#xE3;o</strong>: Fun&#xE7;&#xE3;o &#xE9; concebida como abstra&#xE7;&#xE3;o</p>
+<p><code>f(x) = a</code> pode ser escrito como <code>&#x3BB;a</code></p>
+<p><code>g(x) = x</code> pode ser escrito como <code>&#x3BB;x</code></p>
+<p><strong>Abstra&#xE7;&#xE3;o</strong>: Uma fun&#xE7;&#xE3;o composta &#xE9; conhecida como aplica&#xE7;&#xE3;o</p>
+<p><code>f(3)</code> pode ser escrito como <code>&#x3BB;a(3)</code></p>
+<p><code>f(g(x))</code> pode ser escrito como <code>(&#x3BB;a)(&#x3BB;x)</code></p>
+<p><em>O s&#xED;mbolo &#x2261; &#xE9; usado para denotar a equival&#xEA;nia sint&#xE1;tia de &#x3BB;-termos.</em></p>
+<ul>
+<li>xyz(yx) &#x2261; (((xy)z)(yx))</li>
+<li>&#x3BB;x.(uxy) &#x2261; (&#x3BB;x.((ux)y))</li>
+<li>&#x3BB;u.u(&#x3BB;x.y) &#x2261; (&#x3BB;u.(u(&#x3BB;x.y)))</li>
+<li>(&#x3BB;u.vuu)zy &#x2261; (((&#x3BB;u.((vu)u))z)y)</li>
+<li>ux(yz)(&#x3BB;v.vy) &#x2261; (((ux)(yz))(&#x3BB;v.(vy)))</li>
+<li>(&#x3BB;xyz.xz(yz))uvw &#x2261; (&#x3BB;x.(&#x3BB;y.(&#x3BB;z.((xz)(yz)))))u)v)w)</li>
+</ul>
+<h3 id="exemplos">Exemplos</h3>
+<p>Dada uma fun&#xE7;&#xE3;o <code>&#x3BB;x.x*x*x</code>
+dizemos que <code>&#x3BB;x.x*x*x(2) &#xE9; uma aplica&#xE7;&#xE3;o dessa fun&#xE7;&#xE3;o que reduz em 8</code></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> cube = x =&gt; x * x * x <span class="hljs-comment">//fun&#xE7;&#xE3;o</span>
+cube(<span class="hljs-number">2</span>) <span class="hljs-comment">//aplica&#xE7;&#xE3;o da fun&#xE7;&#xE3;o para 2 a reduzindo em 8</span>
+</code></pre>
+<h3 id="comprimento">Comprimento</h3>
+<p>O comprimento de um &#x3BB;-termo M (lgh(M)) &#xE9; o n&#xFA;mero total de ocorr&#xEA;nias de &#xE1;tomos em M, em que, para todo &#xE1;tomo a, lgh(a) = 1;
+Se M &#x2261; x(&#x3BB;y.yux) ent&#xE3;o lgh(M) = 5</p>
+<p>lgh(MN) = lgh(M) + lgh(N);
+ e lgh(&#x3BB;x.M) = 1 + lgh(M)</p>
+<h2 id="ocorrencia">Ocorrencia</h2>
+<p>Sejam P e Q dois &#x3BB;-termos. A rela&#xE7;&#xE3;o P ocorre em Q (ou ainda, P est&#xE1;
+contido em Q, Q cont&#xE9;m P ou P &#xE9; subtermo de Q) &#xE9; definida de forma indutiva:</p>
+<ul>
+<li>P ocorre em P ;</li>
+<li>Se P oorre em M ou em N , ent&#xE3;o P ocorre em (MN);</li>
+<li>Se P ocorre em M ou P &#x2261; x ent&#xE3;o P oorre em (&#x3BB;x.M).</li>
+</ul>
+<h3 id="exemplo">Exemplo</h3>
+<p>No termo ((xy)(&#x3BB;x.(xy))) existem duas ocorr&#xEA;nias de (xy) e tr&#xEA;s de x.</p>
+<p>As ocorr&#xEA;nias de xy em &#x3BB;xy.xy s&#xE3;o &#x3BB;xy.xy &#x2261; (&#x3BB;x.(&#x3BB;y.( xy ))).</p>
+<p>Para uma paticular ocorr&#xEA;nia de &#x3BB;x.M em P, a ocorr&#xEA;nia de M &#xE9; chamada de escopo da ocorr&#xEA;nia de &#x3BB;x &#xE0; esquerda.</p>
+<p>P &#x2261; (&#x3BB;y.yx(&#x3BB;x.y(&#x3BB;y.z)x))vw</p>
+<ul>
+<li>O escopo do &#x3BB;y mais &#xE0; esquerda &#xE9; yx(&#x3BB;x.y(&#x3BB;y.z)x);</li>
+<li>O escopo do &#x3BB;x &#xE9; y(&#x3BB;y.z)x;</li>
+<li>O escopo do &#x3BB;y mais &#xE0; direita &#xE9; z.</li>
+</ul>
+<h2 id="variaveis-livre-e-ligadas">Variaveis Livre e Ligadas</h2>
+<p>A ocorr&#xEA;nia de uma vari&#xE1;vel x em um termo P &#xE9; dita:</p>
+<ul>
+<li>Ligada se ela est&#xE1; no escopo de um &#x3BB;x em P ;</li>
+<li>Ligada e ligadora se e somente se ela &#xE9; o x em &#x3BB;x;</li>
+<li><p>Livre caso contr&#xE1;rio.</p>
+</li>
+<li><p>Se x tem pelo menos uma ocorr&#xEA;nia ligadora em P , x &#xE9; chamada de vari&#xE1;vel ligada de P ;</p>
+</li>
+<li>Se x tem pelo menos uma ocorr&#xEA;nia livre em P , x &#xE9; chamada vari&#xE1;vel livre de P ;</li>
+<li>O conjunto de todas as vari&#xE1;veis livres de P chamado FV (P);</li>
+<li>Um termo que n&#xE3;o cont&#xE9;m vari&#xE1;veis livres &#xE9; chamado fechado.</li>
+</ul>
+<h3 id="exemplo">Exemplo</h3>
+<p>Dada a express&#xE3;o:</p>
+<p><code>(&#x3BB;x.x + y)(4)</code></p>
+<p>Para avalia-l&#xE1; &#xE9; necess&#xE1;rio saber o valor de y, n&#xE3;o &#xE9; necess&#xE1;rio se preocupar com o valor de x pois ele &#xE9; um parametro formal da express&#xE3;o. x ocorre ligado ao &#x3BB;x, e ser&#xE1; substituido assim que o argumento 4 for aplicado ao argumento. J&#xE1; o y, n&#xE3;o &#xE9; ligado a nada e assim fica livre na express&#xE3;o.</p>
+<p><code>&#x3BB;x.(((ly.(&#x3BB; + z) 7) + x)</code></p>
+<p>Nesse exemplo temos x e y ocorrendo ligados e z sendo livre.
+Agora considere o termo:</p>
+<p><code>P &#x2261; (&#x3BB;y.yx(&#x3BB;x.y(&#x3BB;y.z)x))vw</code></p>
+<ul>
+<li>Todos os quatro y s&#xE3;o ligados;</li>
+<li>Os y mais &#xE0; esquerda e mais &#xE0; direita s&#xE3;o ligadores;</li>
+<li>O x mais &#xE0; esquerda &#xE9; livre;</li>
+<li>O x central &#xE9; ligado e ligador;</li>
+<li>O x mais &#xE0; direita &#xE9; ligado mas n&#xE3;o ligador;</li>
+<li>z, v e w s&#xE3;o livres.</li>
+<li>Logo, F V (P) = {x, z, v, w}; x, nesse caso, &#xE9; uma vari&#xE1;vel ligada e tamb&#xE9;m livre de P .</li>
+</ul>
+<p>Um exemplo de substitui&#xE7;&#xE3;o seria: </p>
+<pre><code>[(&#x3BB;y.xy)/x](&#x3BB;y.x(&#x3BB;x.x))
+[(&#x3BB;y.(xy))/x](&#x3BB;y.(x(&#x3BB;x.x))) (Reescrita com todos os par&#xEA;nteses)
+&#x3BB;y.([&#x3BB;y.(xy)/x](x(&#x3BB;x.x))) (Aplica&#xE7;&#xE3;o da regra)
+&#x3BB;y.([&#x3BB;y.(xy)/x]x)([&#x3BB;y.(xy)/x](&#x3BB;x.x)) (Aplica&#xE7;&#xE3;o da regra)
+&#x3BB;y.(&#x3BB;y.(xy))([&#x3BB;y.(xy)/x](&#x3BB;x.x)) (Aplica&#xE7;&#xE3;o da regra)
+&#x3BB;y.((&#x3BB;y.(xy))(&#x3BB;x.x)) (Aplica&#xE7;&#xE3;o da regra)
+&#x3BB;y.(&#x3BB;y.xy)(&#x3BB;x.x) (Remo&#xE7;&#xE3;o dos par&#xEA;nteses desnecess&#xE1;rios)
+</code></pre><h3 id="convers&#xE3;o-&#x3B1;-renomea&#xE7;&#xE3;o">Convers&#xE3;o &#x3B1; (renomea&#xE7;&#xE3;o)</h3>
+<p>A convers&#xE3;o-a &#xE9; o nome dado &#xE0; opera&#xE7;&#xE3;o de mudan&#xE7;a de nome (consistente) de um par&#xE2;metro formal.</p>
+<p>Seja P um termo que cont&#xE9;m uma ocorr&#xEA;nia de &#x3BB;x.M e suponha que y /&#x2208; FV(M).<em>(/&#x2208; = Simbolo de n&#xE3;o contem)</em>
+A substitui&#xE7;&#xE3;o de: &#x3BB;x.M por &#x3BB;y.[y/x]M &#xE9; chamada de troca de vari&#xE1;vel livre, ou convers&#xE3;o alpha em P. Se P pode ser tranformado em Q por meio de uma s&#xE9;rie finita de convers&#xF5;es alpha, diz-se que P e Q s&#xE3;o congruentes e ent&#xE3;o que P &#xE9; &#x3B1;-convers&#xED;vel para Q</p>
+<pre><code>P = (&#x3BB;x.x + 1) 
+Q = (&#x3BB;x.y + 1)
+</code></pre><p>As duas abstra&#xE7;&#xF5;es s&#xE3;o equivalentes e a convers&#xE3;o &#x3B1;-convers&#xE3;o nos permite mudar o nome do par&#xE2;metro formal de uma abstra&#xE7;&#xE3;o lambda.
+sendo denotado como:</p>
+<p><code>P &#x2261;&#x3B1; Q</code></p>
+<pre><code>&#x3BB;xy.x(xy) &#x2261; &#x3BB;x.(&#x3BB;y.x(xy))
+          &#x2261; &#x3B1; &#x3BB;x.(&#x3BB;v.x(xv))
+          &#x2261; &#x3B1; &#x3BB;u.(&#x3BB;v.u(uv))
+          &#x2261; &#x3BB;uv.u(uv))
+</code></pre><p>Para todos P, Q e R:</p>
+<ul>
+<li>(reflexividade) P &#x2261;&#x3B1; P ;</li>
+<li>(transitividade) P &#x2261;&#x3B1; Q, Q &#x2261;&#x3B1; R &#x21D2; P &#x2261;&#x3B1; R;</li>
+<li>(simetria) P &#x2261;&#x3B1; Q &#x21D2; Q &#x2261;&#x3B1; P .</li>
+</ul>
+<h3 id="redu&#xE7;&#xE3;o-&#x3B2;-aplica&#xE7;&#xE3;o">Redu&#xE7;&#xE3;o &#x3B2; (aplica&#xE7;&#xE3;o)</h3>
+<p>Podemos interpretar no javascript como a aplica&#xE7;&#xE3;o de um argumento em uma fun&#xE7;&#xE3;o.</p>
+<p>A aplica&#xE7;&#xE3;o de um argumento &#xE0; uma abstra&#xE7;&#xE3;o lambda implica na substitui&#xE7;&#xE3;o das ocorr&#xEA;ncias das vari&#xE1;veis correspondentes ao argumento. Sendo que fun&#xE7;&#xF5;es tamb&#xE9;m podem ser passadas como argumentos. sendo exemplificado como:</p>
+<p><code>&#x3BB;x.y.((&#x3BB;x.x - 3)(y) + x)(5)(6)</code>
+<code>&#x3BB;y.((&#x3BB;x.x - 3)(y) + 5)(6)</code>
+<code>((&#x3BB;x.x - 3)(6) + 5)</code>
+<code>((6 - 3) + 5)</code>
+<code>8</code></p>
+<p>Observe que o x mais interno n&#xE3;o foi substituido na primeira redu&#xE7;&#xE3;o, pois estava protegido pelo seu x ligado, j&#xE1; o primeiro x substituiu por 6 apenas seu x ligado.</p>
+<h2 id="forma-normal">Forma Normal</h2>
+<ul>
+<li>Um termo Q que n&#xE3;o possui nenhuma redu&#xE7;&#xE3;o-&#x3B2; &#xE9; chamado de forma normal-&#x3B2; ;</li>
+<li>Se um termo P reduz-&#x3B2; para um termo Q na forma normal-&#x3B2; , ent&#xE3;o diz-se que Q &#xE9; uma formal normal-&#x3B2; de P.</li>
+</ul>
+<h3 id="resumo-at&#xE9;-agora">Resumo at&#xE9; agora</h3>
+<p><strong>Express&#xE3;o lambda</strong>: Representa um programa, um algoritmo, um proedimento para produzir um resultado;</p>
+<p><strong>Redu&#xE7;&#xE3;o-&#x3B2;</strong>: Representa uma computa&#xE7;&#xE3;o, a passagem de um estado de um
+programa para o estado seguinte, dentro do processo de gera&#xE7;&#xE3;o de
+um resultado.</p>
+<p><strong>Forma normal:</strong> Representa um resultado de uma omputa&#xE7;&#xE3;o, um valor que n&#xE3;o &#xE9;
+pass&#xED;vel de novas simplifica&#xE7;&#xF5;es ou elabora&#xE7;&#xF5;es.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../01-category-theory/01-category-theory.html" class="navigation navigation-prev " aria-label="Previous page: Teoria das Categorias">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../03-pure-functions/03-pure-functions.html" class="navigation navigation-next " aria-label="Next page: Funções Puras">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Lambda Calculus","level":"1.4","depth":1,"next":{"title":"Funções Puras","level":"1.5","depth":1,"path":"03-pure-functions/03-pure-functions.md","ref":"03-pure-functions/03-pure-functions.md","articles":[]},"previous":{"title":"Teoria das Categorias","level":"1.3","depth":1,"path":"01-category-theory/01-category-theory.md","ref":"01-category-theory/01-category-theory.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"02-λ-calculus/02-λ-calculus.md","mtime":"2017-08-06T04:10:54.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2018-04-10T21:58:33.881Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

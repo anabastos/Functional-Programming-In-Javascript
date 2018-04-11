@@ -1,0 +1,513 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Metodos funcionais de arrays · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../06- currying-vs-partial-application/06- currying-vs-partial-application.html" />
+    
+    
+    <link rel="prev" href="../04-higher-order-functions/04-higher-order-functions.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Modern Javascript Functional Book</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Sumário
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../00-introduction/00-introduction.html">
+            
+                <a href="../00-introduction/00-introduction.html">
+            
+                    
+                    Introdução
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../01-category-theory/01-category-theory.html">
+            
+                <a href="../01-category-theory/01-category-theory.html">
+            
+                    
+                    Teoria das Categorias
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../02-λ-calculus/02-λ-calculus.html">
+            
+                <a href="../02-λ-calculus/02-λ-calculus.html">
+            
+                    
+                    Lambda Calculus
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../03-pure-functions/03-pure-functions.html">
+            
+                <a href="../03-pure-functions/03-pure-functions.html">
+            
+                    
+                    Funções Puras
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../04-higher-order-functions/04-higher-order-functions.html">
+            
+                <a href="../04-higher-order-functions/04-higher-order-functions.html">
+            
+                    
+                    Funções de primeira ordem
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7" data-path="05-functional-methods-with-arrays.html">
+            
+                <a href="05-functional-methods-with-arrays.html">
+            
+                    
+                    Metodos funcionais de arrays
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../06- currying-vs-partial-application/06- currying-vs-partial-application.html">
+            
+                <a href="../06- currying-vs-partial-application/06- currying-vs-partial-application.html">
+            
+                    
+                    Currying vs Aplicação Parcial
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../07- composition-and-pipelines/07- composition-and-pipelines.html">
+            
+                <a href="../07- composition-and-pipelines/07- composition-and-pipelines.html">
+            
+                    
+                    Composição e pipeline
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../08-functors/08-functors.html">
+            
+                <a href="../08-functors/08-functors.html">
+            
+                    
+                    Funtores
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../09-monads/09-monads.html">
+            
+                <a href="../09-monads/09-monads.html">
+            
+                    
+                    Monadas
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Metodos funcionais de arrays</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="functional-methods-with-arrays">Functional Methods with arrays</h3>
+<h3 id="arrayprototypemap">Array.prototype.map()</h3>
+<p>A fun&#xE7;&#xE3;o <code>map()</code> &#xE9; a capit&#xE3; do time. Ela simplesmente aplica o callback em cada elemento do array.</p>
+<blockquote>
+<p>Sintaxe: <code>arr.map( callback [, thisArg] );</code></p>
+</blockquote>
+<p>Par&#xE2;metros:</p>
+<ul>
+<li><code>callback()</code>: esta fun&#xE7;&#xE3;o produz um elemento para o novo array, recebendo os argumentos:<ul>
+<li><code>currentValue</code>: fornece-nos o elemento em processamento.</li>
+<li><code>index</code>: fornece-nos a posi&#xE7;&#xE3;o do elemento em processamento.</li>
+<li><code>array</code>: fornece-nos o array em processamento.</li>
+</ul>
+</li>
+<li><code>thisArg()</code>: Esta fun&#xE7;&#xE3;o &#xE9; opcional. O valor &#xE9; usado com <code>this</code> ao executar o callback.</li>
+</ul>
+<p>Exemplos:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span>
+  integers = [ <span class="hljs-number">1</span>, <span class="hljs-number">-0</span>, <span class="hljs-number">9</span>, <span class="hljs-number">-8</span>, <span class="hljs-number">3</span> ],
+  numbers = [ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span> ],
+  str = <span class="hljs-string">&quot;Santo Tom&#xE1;s de Aquino&quot;</span>;
+
+<span class="hljs-comment">// map integers to their absolute values</span>
+<span class="hljs-built_in">console</span>.log( integers.map( <span class="hljs-built_in">Math</span>.abs ) );
+
+<span class="hljs-comment">// multiply an array of numbers by their position in the array</span>
+<span class="hljs-built_in">console</span>.log( numbers.map( ( x, i ) =&gt; x * i ) );
+
+<span class="hljs-comment">// Capitalize every other word in a string</span>
+str
+  .split(<span class="hljs-string">&apos; &apos;</span>)
+  .map( ( s, i ) =&gt; !( i % <span class="hljs-number">2</span> ) &amp;&amp; s.toUpperCase() || s );
+</code></pre>
+<p>Embora o m&#xE9;todo <code>Array.prototype.map</code> perten&#xE7;a &#xE0; o objeto <code>Array</code>, este pode ser facilmente extendido e personalizado a gosto nosso.</p>
+<pre><code class="lang-js">MyObject.prototype.map = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> f </span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MyObject( f( <span class="hljs-keyword">this</span>.value ) );
+}
+</code></pre>
+<h3 id="arrayprototypefilter">Array.prototype.filter()</h3>
+<p>A fun&#xE7;&#xE3;o <code>filter()</code> &#xE9; usada para selecionar elementos de um array. O callback deve retornar <code>True</code> (para incluir o elemento no novo array) ou <code>False</code> (para ignor&#xE1;-lo). Podemos obter um comportamento semelhante mediante o uso da fun&#xE7;&#xE3;o <code>map()</code> retornando o valor <code>null</code> para os elementos que desejarmos eliminar, mas a fun&#xE7;&#xE3;o <code>filter()</code> eliminar&#xE1; o elemento do novo array em vez de inserir <code>null</code> em seu lugar.</p>
+<blockquote>
+<p>Sintaxe: <code>arr.filter(callback [, thisArg]);</code></p>
+</blockquote>
+<p>Par&#xE2;metros:</p>
+<ul>
+<li><code>callback()</code>: Esta fun&#xE7;&#xE3;o &#xE9; usada para testar cada elemento do array. Retorna <code>True</code> para manter o elemento, <code>False</code> caso contr&#xE1;rio. Segue-se seus par&#xE2;metros:<ul>
+<li><code>currentValue</code>: fornece-nos o elemento em processamento.</li>
+<li><code>index</code>: fornece-nos a posi&#xE7;&#xE3;o do elemento em processamento.</li>
+<li><code>array</code>: fornece-nos o array em processamento.</li>
+</ul>
+</li>
+<li><code>thisArg()</code>: Esta fun&#xE7;&#xE3;o &#xE9; opcional. O valor &#xE9; usado com <code>this</code> ao executar o callback. </li>
+</ul>
+<p>Exemplos:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> 
+  myArray = [ <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">6</span>, <span class="hljs-number">10</span>, <span class="hljs-number">15</span> ],
+  words = <span class="hljs-string">&quot;4 &#xE9; o segundo n&#xFA;mero quadrado. 2&#xB2; = 2 x 2 = 2 + 2.&quot;</span>.split(<span class="hljs-string">&apos; &apos;</span>),
+  re = <span class="hljs-regexp">/[^x][a-zA-Z]|[&#xE9;&#xF3;&#xE1;&#xFA;&#xED;]/</span>;
+
+<span class="hljs-comment">// remove all negative numbers</span>
+<span class="hljs-built_in">console</span>.log( [ <span class="hljs-number">-1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">-10</span>, <span class="hljs-number">19</span> ].filter( x =&gt; x &gt; <span class="hljs-number">0</span> ) );
+
+<span class="hljs-comment">// remove null values after a map operation</span>
+<span class="hljs-built_in">console</span>.log( words.filter( s =&gt; s.match( re ) ) );
+
+<span class="hljs-comment">// remove radom objects from a array</span>
+<span class="hljs-built_in">console</span>.log( myArray.filter( () =&gt; <span class="hljs-number">0</span> | <span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">20</span> ) );
+</code></pre>
+<h3 id="arrayprototypereduce">Array.prototype.reduce()</h3>
+<p>&#xC0;s vezes chamada de <code>fold</code>, a fun&#xE7;&#xE3;o <code>reduce()</code> &#xE9; usada para reduzir os elementos do array em um. O callback retorna a l&#xF3;gica respons&#xE1;vel por combinar os objetos. Geralmente a usamos com n&#xFA;meros para obter o produd&#xF3;rio ou o somat&#xF3;rio destes. E se tratando de um conjunto strings, a usamos para concaten&#xE1;-las formando uma s&#xF3; &#xFA;nica.</p>
+<blockquote>
+<p>Sintaxe: <code>arr.reduce(callback [, initialValue]);</code></p>
+</blockquote>
+<ul>
+<li><code>callback()</code>: esta fun&#xE7;&#xE3;o retorna a combina&#xE7;&#xE3;o de dois elementos num s&#xF3;. Segue-se seus par&#xE2;metros:<ul>
+<li><code>previousValue</code>: fornece-nos o valor previamente retornado pela &#xFA;ltima execu&#xE7;&#xE3;o do callback, ou o <code>initialValue</code>, se fornecido</li>
+<li><code>currentValue</code>: fornece-nos o elemento em processamento.</li>
+<li><code>index</code>: fornece-nos a posi&#xE7;&#xE3;o do elemento em processamento.</li>
+<li><code>array</code>: fornece-nos o array em processamento.</li>
+</ul>
+</li>
+<li><code>previousValue()</code>: Est&#xE1; fun&#xE7;&#xE3;o &#xE9; opcional. &#xC9; o objeto a ser usado pela primeira execu&#xE7;&#xE3;o do <code>callback</code>.</li>
+</ul>
+<p>Exemplos:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> numbers = [ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span> ];
+
+<span class="hljs-comment">// sum up all the values of an array</span>
+<span class="hljs-built_in">console</span>.log( numbers.reduce( ( x, y ) =&gt; x + y, <span class="hljs-number">0</span> ) );
+
+<span class="hljs-comment">// prod up all the values of an array</span>
+<span class="hljs-built_in">console</span>.log( numbers.reduce( ( x, y ) =&gt; x * y, <span class="hljs-number">1</span> ) );
+
+<span class="hljs-comment">// find the largest number</span>
+<span class="hljs-built_in">console</span>.log( numbers.reduce( ( a, b ) =&gt; <span class="hljs-built_in">Math</span>.max( a, b ) ) );
+</code></pre>
+<h3 id="honorable-mentions">Honorable mentions</h3>
+<p>A caixa de ferramentas a auxiliar-nos n&#xE3;o &#xE9; composta apenas pelas fun&#xE7;&#xF5;es <code>map()</code>, <code>filter()</code> e <code>reduce()</code>. Existem tantas mais, as quais podemos usar em nossos aplicativos funcionais.</p>
+<h4 id="arrayprototypeforeach">Array.prototype.forEach</h4>
+<p>Essencialmente a vers&#xE3;o n&#xE3;o pura do <code>map()</code>, <code>forEach()</code> tamb&#xE9;m itera e aplica um <code>callback()</code> sobre cada elemento do array, por&#xE9;m, nada retorna. &#xC9; simplesmente uma alternativa &quot;clean&quot; ao la&#xE7;o <code>for</code>.</p>
+<blockquote>
+<p>Sintaxe <code>arr.forEach(callback [, thisArg]);</code></p>
+</blockquote>
+<p>Par&#xE2;metros: </p>
+<ul>
+<li><code>callback()</code>: Est&#xE1; fun&#xE7;&#xE3;o ser&#xE1; executada sobre cada elemento do array. Segue-se seus par&#xE2;metros:<ul>
+<li><code>currentValue</code>: fornece-nos o elemento em processamento.</li>
+<li><code>index</code>: fornece-nos a posi&#xE7;&#xE3;o do elemento em processamento.</li>
+<li><code>array</code>: fornece-nos o array em processamento.</li>
+</ul>
+</li>
+<li><code>thisArg()</code>: Esta fun&#xE7;&#xE3;o &#xE9; opcional. O valor &#xE9; usado com <code>this</code> ao executar o callback. </li>
+</ul>
+<p>Exemplos:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> arr = [ <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">10</span>, <span class="hljs-number">20</span> ];
+
+<span class="hljs-keyword">let</span> nodes = arr.map( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> x </span>) </span>{
+  <span class="hljs-keyword">let</span> elem = <span class="hljs-built_in">document</span>.createElement( <span class="hljs-string">&quot;div&quot;</span> );
+  elem.textContent = x;
+  <span class="hljs-keyword">return</span> elem;
+});
+
+<span class="hljs-comment">// log the value of each item</span>
+arr.forEach( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> x </span>) </span>{ <span class="hljs-built_in">console</span>.log( x ) } );
+
+<span class="hljs-comment">// append notes to the DOM</span>
+nodes.forEach( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> x </span>) </span>{ <span class="hljs-built_in">document</span>.body.appendChild( x ) } );
+</code></pre>
+<h4 id="arrayprototypeconcat">Array.prototype.concat</h4>
+<p>Ao trabalharmos com diversos arrays e, este trabalho n&#xE3;o envolver loops <code>for</code> e <code>while</code>, certamente precisaremos un&#xED;-los. Eis a fun&#xE7;&#xE3;o &quot;built-in&quot; <code>concat()</code>. E o legal &#xE9; que ela retorna os arryas mantendo-os intactos, ou seja, &#xE9; pura. E tem mais, ela &#xE9; capaz de unir uma quantidade indefinida de arrays.</p>
+<pre><code class="lang-js"><span class="hljs-comment">// concatenate two arrays</span>
+<span class="hljs-built_in">console</span>.log( [ <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span> ].concat( [ <span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>, <span class="hljs-string">&apos;c&apos;</span> ] ) ); <span class="hljs-comment">// out: [ 2, 4, 6, &apos;a&apos;, &apos;b&apos;, &apos;c&apos; ]</span>
+</code></pre>
+<p>Podemos perceber que ela uniu-os mantendo o original intacto. Isso quer dizer que podemos fazer o encadeamento sem maiores problemas.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span>
+  arr1 = [ <span class="hljs-number">2</span>, <span class="hljs-number">6</span>, <span class="hljs-number">12</span>, <span class="hljs-number">20</span> ],
+  arr2 = [ <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">9</span>, <span class="hljs-number">16</span> ],
+  arr3 = [ <span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">13</span>, <span class="hljs-number">25</span> ];
+
+<span class="hljs-keyword">let</span> x = arr1.concat( arr2, arr3 );
+<span class="hljs-keyword">let</span> y = arr1.concat( arr2 ).concat( arr3 );
+<span class="hljs-keyword">let</span> z = arr1.concat( arr1.concat( arr3 ) );
+<span class="hljs-built_in">console</span>.log( x, y, z )
+</code></pre>
+<p>As vari&#xE1;veis <code>x</code>, <code>y</code> e <code>z</code> todas cont&#xEA;m <code>[ 2, 6, 12, 20, 1, 4, 9, 16, 1, 5, 13, 25 ]</code>.</p>
+<h4 id="arrayprototypereverse">Array.prototype.reverse</h4>
+<h4 id="arrayprototypesort">Array.prototype.sort</h4>
+<h4 id="arrayprototypeevery-and-arrayprototypesome">Array.prototype.every and Array.prototype.some</h4>
+<p><a href="https://gist.github.com/lukkaslt/1c2514d4e241498bf81d24ac2da97986" target="_blank">Fonte</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../04-higher-order-functions/04-higher-order-functions.html" class="navigation navigation-prev " aria-label="Previous page: Funções de primeira ordem">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../06- currying-vs-partial-application/06- currying-vs-partial-application.html" class="navigation navigation-next " aria-label="Next page: Currying vs Aplicação Parcial">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Metodos funcionais de arrays","level":"1.7","depth":1,"next":{"title":"Currying vs Aplicação Parcial","level":"1.8","depth":1,"path":"06- currying-vs-partial-application/06- currying-vs-partial-application.md","ref":"06- currying-vs-partial-application/06- currying-vs-partial-application.md","articles":[]},"previous":{"title":"Funções de primeira ordem","level":"1.6","depth":1,"path":"04-higher-order-functions/04-higher-order-functions.md","ref":"04-higher-order-functions/04-higher-order-functions.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"05-functional-methods-with-arrays/05-functional-methods-with-arrays.md","mtime":"2018-04-10T17:48:41.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2018-04-10T21:58:33.881Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

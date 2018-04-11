@@ -31,3 +31,9 @@ npm install -g gitbook-cli
 ### Running
 `gitbook serve`
 
+### Build to gh-pages
+```bash
+gitbook install && gitbook build
+cp -R _book/* .
+git clean -fx _book
+```

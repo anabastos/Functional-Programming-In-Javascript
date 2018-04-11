@@ -1,0 +1,444 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Currying vs Aplicação Parcial · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../07- composition-and-pipelines/07- composition-and-pipelines.html" />
+    
+    
+    <link rel="prev" href="../05-functional-methods-with-arrays/05-functional-methods-with-arrays.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Modern Javascript Functional Book</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Sumário
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../00-introduction/00-introduction.html">
+            
+                <a href="../00-introduction/00-introduction.html">
+            
+                    
+                    Introdução
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../01-category-theory/01-category-theory.html">
+            
+                <a href="../01-category-theory/01-category-theory.html">
+            
+                    
+                    Teoria das Categorias
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../02-λ-calculus/02-λ-calculus.html">
+            
+                <a href="../02-λ-calculus/02-λ-calculus.html">
+            
+                    
+                    Lambda Calculus
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../03-pure-functions/03-pure-functions.html">
+            
+                <a href="../03-pure-functions/03-pure-functions.html">
+            
+                    
+                    Funções Puras
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../04-higher-order-functions/04-higher-order-functions.html">
+            
+                <a href="../04-higher-order-functions/04-higher-order-functions.html">
+            
+                    
+                    Funções de primeira ordem
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../05-functional-methods-with-arrays/05-functional-methods-with-arrays.html">
+            
+                <a href="../05-functional-methods-with-arrays/05-functional-methods-with-arrays.html">
+            
+                    
+                    Metodos funcionais de arrays
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.8" data-path="06- currying-vs-partial-application.html">
+            
+                <a href="06- currying-vs-partial-application.html">
+            
+                    
+                    Currying vs Aplicação Parcial
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../07- composition-and-pipelines/07- composition-and-pipelines.html">
+            
+                <a href="../07- composition-and-pipelines/07- composition-and-pipelines.html">
+            
+                    
+                    Composição e pipeline
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../08-functors/08-functors.html">
+            
+                <a href="../08-functors/08-functors.html">
+            
+                    
+                    Funtores
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../09-monads/09-monads.html">
+            
+                <a href="../09-monads/09-monads.html">
+            
+                    
+                    Monadas
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Currying vs Aplicação Parcial</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="currying-vs-partial-application">Currying vs Partial Application</h2>
+<h2 id="currying">Currying</h2>
+<p>Como vimos no <a href="https://github.com/anabastos/Functional-Book-ES6/blob/master/02-%CE%BB-calculus/02-%CE%BB-calculus.md" target="_blank">capitulo 1</a> a composi&#xE7;&#xE3;o de fun&#xE7;&#xF5;es recebe apenas um parametro que s&#xE3;o aplicados um de cada vez, por isso ao programarmos em linguagens puramente funcional geralmente podemos usar uma fun&#xE7;&#xE3;o com multiplos parametros pois o proprio compilar reescreve em novas fun&#xE7;&#xF5;es de apenas um parametros compostas entre si. Isso &#xE9; o que chamamos de <strong>&quot;Currying&quot;</strong>, palavra que veio do Haskell Curry, um matematico que foi de grande influencia no desenvolvimento de linguagens funcionais.
+Por&#xE9;m, quando usamos multiplos argumentos no js temos algo parecido com isso:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> add = (x, y) =&gt;  x + y
+add(<span class="hljs-number">1</span>) <span class="hljs-comment">//NaN</span>
+add(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-comment">//2</span>
+</code></pre>
+<p>Para simularmos um currying no javascript podemos fazer algo assim:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> h =  x =&gt; y =&gt; x + y
+}
+add(a)(b) <span class="hljs-comment">// a + b</span>
+</code></pre>
+<p>Nesse caso estamos retornar uma sub-fun&#xE7;&#xE3;o dentro de uma fun&#xE7;&#xE3;o para podermos resolver o <code>x + y</code> passando um parametro por vez.
+Tanto que, quanto tentamos aplicar apenas um dos argumentos, n&#xE3;o recebemos um NaN mas sim uma fun&#xE7;&#xE3;o esperando o proximo argumento.</p>
+<pre><code class="lang-javascript">add(a) <span class="hljs-comment">// y =&gt; a + y</span>
+</code></pre>
+<p>Supondo que vamos receber v&#xE1;rios argumentos na nossa fun&#xE7;&#xE3;o, nesse caso teremos que retornar fun&#xE7;&#xF5;es que retornar fun&#xE7;&#xF5;es que retornam fun&#xE7;&#xF5;es. </p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> addThree =  x =&gt; y =&gt; z =&gt; x + y + z
+}
+addThree(a)(b)(c) <span class="hljs-comment">// a + b + c</span>
+</code></pre>
+<p>Compiladores de linguagens funcionais como haskell interpretam apenas um argumento por vez, ent&#xE3;o por mais que voc&#xEA; coloque os argumentos como <code>add(1,2)</code> ele j&#xE1; faz o pr&#xF3;prio curry por padr&#xE3;oe portanto a aplica&#xE7;&#xE3;o parcial de um <code>add(1)(2)</code> da mesma fun&#xE7;&#xE3;o seria aceita sem problemas.
+Um exemplo disso &#xE9; assinatura das fun&#xE7;&#xF5;es em Haskell, uma fun&#xE7;&#xE3;o como a fun&#xE7;&#xE3;o abaixo teria a seguinte assinatura:</p>
+<pre><code class="lang-haskell"><span class="hljs-title">addThree</span> :: <span class="hljs-type">Int</span> -&gt; <span class="hljs-type">Int</span> -&gt; <span class="hljs-type">Int</span> -&gt; <span class="hljs-type">Int</span>  
+<span class="hljs-title">addThree</span> x y z = x + y + z
+</code></pre>
+<p>Em que representa os argumentos que ser&#xE3;o recebidos em ordem e o retorno esperado da fun&#xE7;&#xE3;o, no caso um inteiro com a soma dos argumentos.
+Isso vem do fato que haskell teve suas bases no <a href="">calculo lambda</a> em que apenas um argumento &#xE9; aceito por fun&#xE7;&#xE3;o, veremos mais sobre isso no capitulo de calculo lambda.</p>
+<p>Para facilitar o processo e simular o que linguagens funcionais fazem, podemos usar o curry da biblioteca <em>RamdaJS</em> tamb&#xE9;m para resolver nosso problema de forma semantica:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> add =  curry((x, y) -&gt; x + y)
+add(a)(b) <span class="hljs-comment">// a + b</span>
+</code></pre>
+<p>Quando fazemos <code>1 + 1</code> no javascript esta opera&#xE7;&#xE3;o binaria tem dois parametros, em linguagens funcionais o operador <code>+</code> geralmente funciona como a fun&#xE7;&#xE3;o que criamos agora. Ou seja, quando voce escreve x + y o compilador reescreve o codigo transforma o calculo em infixo ((+) x y), em que a fun&#xE7;&#xE3;o + chama dois parametros.</p>
+<h2 id="partial-application">Partial Application</h2>
+<p>Notamos que fun&#xE7;&#xF5;es com multiplos parametros podem ser quebrados em fun&#xE7;&#xF5;es com parametros menores e &#xE9; a forma matematica de se fazer isso mas isso nos leva a outra tecnica chamada <em>Aplica&#xE7;&#xE3;o parcial</em> e tem uma diferen&#xE7;a tenua do <em>Curry</em>.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> add = (a, b) =&gt;
+    (b === <span class="hljs-literal">undefined</span>) ? (b =&gt; add(a, b)) : a + b
+</code></pre>
+<h3 id="aridade">Aridade</h3>
+<p>Podemos tamb&#xE9;m implementar nosso proprio curry no javascript e pra isso chegamos no conceito <em>aridade</em>. Aridade &#xE9; o numero de argumento que a nossa fun&#xE7;&#xE3;o espera para sabermos quando devemos parar de retornar fun&#xE7;&#xF5;es e retornar um valor. Para implementarmos nosso curry temos de primeiro saber a aridade de nossa fun&#xE7;&#xE3;o</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> arity = fn =&gt; <span class="hljs-keyword">return</span> fn.length
+<span class="hljs-keyword">const</span> add =&gt; (x, y) =&gt; x + y
+
+arity(add) <span class="hljs-comment">//2</span>
+</code></pre>
+<p>Note que a fun&#xE7;&#xE3;o <code>add</code> que soma dois numeros tem um valor aridade igual a 2.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> arity = fn =&gt; fn.length
+</code></pre>
+<p>Para implementarmos uma fun&#xE7;&#xE3;o de curry vamos precisar saber qual a aridade da fun&#xE7;&#xE3;o e pra isso vamos reutilizar a fun&#xE7;&#xE3;o <code>arity</code>.
+Continuando a logica, vamos ent&#xE3;o criar uma fun&#xE7;&#xE3;o <code>curry</code> e fazer com que ela chame uma uma nova fun&#xE7;&#xE3;o chamada <code>curried</code> que vai ser nossa fun&#xE7;&#xE3;o &quot;&quot;curriada&quot;&quot;.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> curry = (fn) =&gt; {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">const</span> curried = () =&gt; <span class="hljs-string">&quot;Curry com batata&quot;</span>
+}
+</code></pre>
+<p>Assim:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> add = (x, y) =&gt; x + y
+curry(add) <span class="hljs-comment">//[Function]</span>
+curry(add)(<span class="hljs-number">1</span>) <span class="hljs-comment">//&quot;Curry com batata&quot; </span>
+curry(add)(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>) <span class="hljs-comment">//TypeError: curry(...)(...) is not a function</span>
+</code></pre>
+<p>Para considerarmos mais de um argumento podemos ent&#xE3;o receber os argumentos da primeira fun&#xE7;&#xE3;o e passar como argumento para nossa curried. Alcan&#xE7;ou a aridade a fun&#xE7;&#xE3;o &#xE9; chamada caso contrario a fun&#xE7;&#xE3;o curried &#xE9; chamada novamente com os argumentos remanescentes.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> curry = (fn, ...args) =&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">const</span> curried = (...args) =&gt; {
+      <span class="hljs-keyword">return</span> args.length &gt;= arity(fn) ?
+        fn.call(<span class="hljs-keyword">this</span>, ...args) :
+        (...rest) =&gt;  curried.call(<span class="hljs-keyword">this</span>, ...args, ...rest);
+  }
+}
+
+Testando temos o esperado:
+
+<span class="hljs-string">``</span><span class="hljs-string">`javascript
+const add = (x, y) =&gt; x + y
+
+const curriedAdd = curry(add)
+const addTwo = add(2)
+add2(2) //4
+</span></code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../05-functional-methods-with-arrays/05-functional-methods-with-arrays.html" class="navigation navigation-prev " aria-label="Previous page: Metodos funcionais de arrays">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../07- composition-and-pipelines/07- composition-and-pipelines.html" class="navigation navigation-next " aria-label="Next page: Composição e pipeline">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Currying vs Aplicação Parcial","level":"1.8","depth":1,"next":{"title":"Composição e pipeline","level":"1.9","depth":1,"path":"07- composition-and-pipelines/07- composition-and-pipelines.md","ref":"07- composition-and-pipelines/07- composition-and-pipelines.md","articles":[]},"previous":{"title":"Metodos funcionais de arrays","level":"1.7","depth":1,"path":"05-functional-methods-with-arrays/05-functional-methods-with-arrays.md","ref":"05-functional-methods-with-arrays/05-functional-methods-with-arrays.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"06- currying-vs-partial-application/06- currying-vs-partial-application.md","mtime":"2018-04-10T17:48:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2018-04-10T21:58:33.881Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
