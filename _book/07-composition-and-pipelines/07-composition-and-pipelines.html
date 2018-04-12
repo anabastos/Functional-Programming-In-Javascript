@@ -60,7 +60,7 @@
     <link rel="next" href="../08-functors/08-functors.html" />
     
     
-    <link rel="prev" href="../06- currying-vs-partial-application/06- currying-vs-partial-application.html" />
+    <link rel="prev" href="../06-currying-vs-partial-application/06- currying-vs-partial-application.md" />
     
 
     </head>
@@ -182,9 +182,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="../06- currying-vs-partial-application/06- currying-vs-partial-application.html">
+        <li class="chapter " data-level="1.8" data-path="../06-currying-vs-partial-application/06- currying-vs-partial-application.md">
             
-                <a href="../06- currying-vs-partial-application/06- currying-vs-partial-application.html">
+                <span>
             
                     
                     Currying vs Aplicação Parcial
@@ -195,9 +195,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.9" data-path="07- composition-and-pipelines.html">
+        <li class="chapter active" data-level="1.9" data-path="07-composition-and-pipelines.html">
             
-                <a href="07- composition-and-pipelines.html">
+                <a href="07-composition-and-pipelines.html">
             
                     
                     Composição e pipeline
@@ -279,7 +279,43 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h4 id="sequential-pattern-strategy">Sequential Pattern Strategy</h4>
+<p>Quando falamos de paradigmas de programa&#xE7;&#xE3;o diferentes tamb&#xE9;m falamos de formar de modelar e pensar em problemas diferentes. </p>
+<p>Em linguagens procedurais nossas computa&#xE7;&#xF5;es envolvem nosso c&#xF3;digo separado em modulos operando em dados. J&#xE1; em linguagens orientadas a objetos encapsulamos nosso c&#xF3;digo e dados para que eles interajam entre si por meio de mensagens. Esses modelos s&#xE3;o assim pois vem da maquina de turing como j&#xE1; explicado em capitulos anteriores
+Vis whose theoretical model of computation is the Turing Machine, LISP&apos;s theoretical model of computation is the Lambda calculus </p>
+<p><a href="http://www.math-cs.gordon.edu/courses/cs323/LISP/lisp.html" target="_blank">Img</a></p>
+<p>Pra quem esta habituado com OOP ou programa&#xE7;&#xE3;o imperativa, a programa&#xE7;&#xE3;o funcional mais pura lida de uma nova perspectiva a forma de modelar o fluxo do seu programa que &#xE9; o de componentiza&#xE7;&#xE3;o. Nele os dados fluem por meio de apenas fun&#xE7;&#xF5;es completamente independentes entre si visto que o seu modelo teorico de computa&#xE7;&#xE3;o vem do lambda calculus lidar apenas com fun&#xE7;&#xF5;es.</p>
+<p>Ent&#xE3;o na pratica a forma de pensar para resolver um problema no padr&#xE3;o sequencial &#xE9;, separar o problema em pequenas fun&#xE7;&#xF5;es puras de sub-problemas e &quot;compo-las&quot; para solucionar.</p>
+<p><strong>PLUS:</strong> Tamb&#xE9;m &#xE9; muito mais facil testar seu c&#xF3;digo com pequenas fun&#xE7;&#xF5;es em que voc&#xEA; pode testar cada passo.</p>
+<h3 id="como-composi&#xE7;&#xE3;o-de-fun&#xE7;&#xF5;es-funciona">Como composi&#xE7;&#xE3;o de fun&#xE7;&#xF5;es funciona?</h3>
+<p>Composi&#xE7;ao de fun&#xE7;&#xF5;es vem tamb&#xE9;m de um conceito matematico, nele trabalhamos com a combination combina&#xE7;&#xE3;o de fun&#xE7;&#xF5;es como <code>f</code> ou <code>g</code> em <code>f . g</code>. </p>
+<p>Em Javascript normal fariamos algo assim:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> f = x =&gt; x + <span class="hljs-number">1</span>;
+<span class="hljs-keyword">const</span> g = y =&gt; y * y;
+<span class="hljs-keyword">const</span> x = <span class="hljs-number">2</span>;
+<span class="hljs-keyword">const</span> composed = f(g(x)); <span class="hljs-comment">// 5</span>
+</code></pre>
+<p>Nesse exemplo, temos uma fun&#xE7;&#xE3;o que adiciona <code>1</code> e que dobra o valor. Quando passando x para a fun&#xE7;&#xE3;o <code>g</code> o seu retorno &#xE9; passado para fun&#xE7;&#xE3;o <code>f</code> retornando o valor de 5.
+Ent&#xE3;o nossa composi&#xE7;&#xE3;o &#xE9; avaliada de dentro para fora e n&#xE3;o segue o fluxo sequencial que queremos ent&#xE3;o ele aparenta muito mais complexo do que deveria e pra isso precisamos de pipeline.</p>
+<h5 id="pipeline">Pipeline</h5>
+<p>Pipeline em ci&#xEA;ncia da computa&#xE7;&#xE3;o &#xE9; todo tipo de processamento de dados conectado em s&#xE9;rie em que a sa&#xED;da de um elemento &#xE9; a entrada do proximo similar ao pipe do UNIX.
+O javascript tem uma proposal para a implementa&#xE7;&#xE3;o de um <a href="https://github.com/tc39/proposal-pipeline-operator" target="_blank">pipeline operator</a> inspirado por linguagens funcionais como F#, OCaml, Elixir, Elm. Mas por enquanto &#xE9; necessario fun&#xE7;&#xF5;es como <code>pipe()</code> e <code>compose()</code> do Ramda ou o <code>flow()</code> do Lodash.</p>
+<p>Dessa forma nosso c&#xF3;digo pode aparentar assim:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> f = x =&gt; x + <span class="hljs-number">1</span>
+<span class="hljs-keyword">const</span> g = y =&gt; y * y
+<span class="hljs-keyword">const</span> x = <span class="hljs-number">2</span>
+<span class="hljs-keyword">const</span> composed = x 
+  |&gt; f
+  |&gt; g <span class="hljs-comment">// 5</span>
+</code></pre>
+<p>Isso acaba se tornando muito mais legivel visto que temos uma vis&#xE3;o sequencial em que temos controle do fluxo sendo aplicado ao valor x mantendo a declaratividade do c&#xF3;digo.</p>
+<h3 id="resolvendo-problemas">Resolvendo problemas</h3>
+<h3 id="currying">Currying</h3>
+<h3 id="async">Async</h3>
+<h3 id="erros">Erros</h3>
+<h3 id="either">Either</h3>
+<h3 id="side-effects">Side Effects</h3>
+
                                 
                                 </section>
                             
@@ -306,7 +342,7 @@
 
             
                 
-                <a href="../06- currying-vs-partial-application/06- currying-vs-partial-application.html" class="navigation navigation-prev " aria-label="Previous page: Currying vs Aplicação Parcial">
+                <a href="../06-currying-vs-partial-application/06- currying-vs-partial-application.md" class="navigation navigation-prev " aria-label="Previous page: Currying vs Aplicação Parcial">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -322,7 +358,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Composição e pipeline","level":"1.9","depth":1,"next":{"title":"Funtores","level":"1.10","depth":1,"path":"08-functors/08-functors.md","ref":"08-functors/08-functors.md","articles":[]},"previous":{"title":"Currying vs Aplicação Parcial","level":"1.8","depth":1,"path":"06- currying-vs-partial-application/06- currying-vs-partial-application.md","ref":"06- currying-vs-partial-application/06- currying-vs-partial-application.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"07- composition-and-pipelines/07- composition-and-pipelines.md","mtime":"2017-07-13T18:55:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2018-04-10T21:58:33.881Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Composição e pipeline","level":"1.9","depth":1,"next":{"title":"Funtores","level":"1.10","depth":1,"path":"08-functors/08-functors.md","ref":"08-functors/08-functors.md","articles":[]},"previous":{"title":"Currying vs Aplicação Parcial","level":"1.8","depth":1,"path":"06-currying-vs-partial-application/06- currying-vs-partial-application.md","ref":"06-currying-vs-partial-application/06- currying-vs-partial-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"07-composition-and-pipelines/07-composition-and-pipelines.md","mtime":"2018-04-12T17:00:18.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2018-04-12T17:01:47.579Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -330,10 +366,6 @@
         
     <script src="../gitbook/gitbook.js"></script>
     <script src="../gitbook/theme.js"></script>
-    
-        
-        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
     
         
         <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
