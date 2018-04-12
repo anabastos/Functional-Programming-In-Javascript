@@ -2,17 +2,17 @@
 
 Our book is still in portuguese but we will translate it later 🤷🏻‍️
 
-* [Summary](README.md)
-* [Introduction](00-introduction/00-introduction.md)
-* [Category Theory](01-category-theory/01-category-theory.md)
-* [Lambda Calculus](02-λ-calculus/02-λ-calculus.md)
-* [Pure Functions](03-pure-functions/03-pure-functions.md)
-* [High Order Functions](04-higher-order-functions/04-higher-order-functions.md)
-* [Functional Methods With Arrays](05-functional-methods-with-arrays/05-functional-methods-with-arrays.md)
-* [Currying vs Parcial Application](06- currying-vs-partial-application/06- currying-vs-partial-application.md)
-* [Composition and Pipeline](07- composition-and-pipelines/07- composition-and-pipelines.md)
-* [Functors](08-functors/08-functors.md)
-* [Monads](09-monads/09-monads.md)
+* [Summary](README.html)
+* [Introduction](00-introduction/00-introduction.html)
+* [Category Theory](01-category-theory/01-category-theory.html)
+* [Lambda Calculus](02-λ-calculus/02-λ-calculus.html)
+* [Pure Functions](03-pure-functions/03-pure-functions.html)
+* [High Order Functions](04-higher-order-functions/04-higher-order-functions.html)
+* [Functional Methods With Arrays](05-functional-methods-with-arrays/05-functional-methods-with-arrays.html)
+* [Currying vs Parcial Application](06-currying-vs-partial-application/06-currying-vs-partial-application.html)
+* [Composition and Pipeline](07-composition-and-pipelines/07-composition-and-pipelines.html)
+* [Functors](08-functors/08-functors.html)
+* [Monads](09-monads/09-monads.html)
 
 ### Authors
 

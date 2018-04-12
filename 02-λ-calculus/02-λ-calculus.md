@@ -37,8 +37,8 @@ Temos então:
 Sendo a cabeça `λx` consistindo no lambda, definindo a função, os seus parametros formais(`x`) e o corpo a expressão `x + y`
 Tal exeplo pode ser lido como "Função que recebe `x` a qual adiciona x a 1".
 
-Considere x + y.
-Ela pode ser formalizada na notação matematica casualmente atravez de funcoes de um unico paramento
+Uma expressão lambda representa um programa, um algoritmo, um proedimento para produzir um resultado
+Considere x + y, ela pode ser formalizada na notação matematica casualmente atravez de funcoes de um unico paramento
 
 `f(x) = x + y` ou
 `g(y) = x + y`
@@ -319,9 +319,13 @@ Para todos P, Q e R:
 - (transitividade) P ≡α Q, Q ≡α R ⇒ P ≡α R;
 - (simetria) P ≡α Q ⇒ Q ≡α P .
 
+[TODO: Deixar legivel]
+
 ### Redução β (aplicação)
 
-Podemos interpretar no javascript como a aplicação de um argumento em uma função.
+Representa uma computação, a passagem de um estado de um
+programa para o estado seguinte, dentro do processo de geração de
+um resultado. Podemos interpretar no javascript como a aplicação de um argumento em uma função.
 
 A aplicação de um argumento à uma abstração lambda implica na substituição das ocorrências das variáveis correspondentes ao argumento. Sendo que funções também podem ser passadas como argumentos. sendo exemplificado como:
 
@@ -335,16 +339,34 @@ Observe que o x mais interno não foi substituido na primeira redução, pois es
 
 ## Forma Normal 
 
-- Um termo Q que não possui nenhuma redução-β é chamado de forma normal-β ;
-- Se um termo P reduz-β para um termo Q na forma normal-β , então diz-se que Q é uma formal normal-β de P.
+Representa um resultado de uma computação, um valor que não é
+passível de novas simplificações ou elaborações. Um termo Q que não possui nenhuma redução-β é chamado de forma normal-β. Sendo similar ao valor já avaliado de funções.
+Se um termo P reduz-β para um termo Q na forma normal-β, ou avalia os termos até retornarem um valor então diz-se que Q é uma formal normal-β de P.
 
-### Resumo até agora
+### Fazendo mais churches :)
 
-**Expressão lambda**: Representa um programa, um algoritmo, um proedimento para produzir um resultado;
+``` javascript
+const id = x => x
 
-**Redução-β**: Representa uma computação, a passagem de um estado de um
-programa para o estado seguinte, dentro do processo de geração de
-um resultado.
+const zero = f => x => x
+const one = f => x => f(x)
+const two = f => x => f(f(x))
+const three = f => x => f(f(f(x)))
+const four = f => x => f(f(f(f(x))))
+const four2 => f => x => succ(three)
 
-**Forma normal:** Representa um resultado de uma omputação, um valor que não é
-passível de novas simplificações ou elaborações.
+// recursao => explicar bem pq eu apanhei p/ entender
+const Y = f => (x => x(x))(y => f(x => y(y)(x)));
+
+const succ = n => f => x => f(n(f)(x))
+const pred = n => n(p => z => z(succ(p(TRUE)))(p(TRUE)))(z => z(ZERO)(ZERO))(FALSE)
+// const succ_pair = p => pair(SECOND(p))(succ(SECOND(p)))
+// const pred = n => FIRST(n(succ_pair)(pair(ZERO)(ZERO)))
+
+const add = n => m => m(succ)(n)
+const sub = n => m => m(pred)(n)
+const mult = n => m => m(add(n))(ZERO)
+const exp = n => m => m(n)
+const FIVE = add(TWO)(THREE)
+
+```
