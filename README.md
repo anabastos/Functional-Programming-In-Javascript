@@ -1,5 +1,6 @@
-# Modern Javascript Functional Book
+# Functional Programming in Javascript
 
+Javascript approach to functional programming.
 Our book is still in portuguese but we will translate it later 🤷🏻‍️
 
 * [Summary](README.html)

@@ -1,6 +1,6 @@
 # Summary
 
-## Modern Javascript Functional Book
+## Functional Programming in Javascript
 * [Sumário](README.md)
 * [Introdução](00-introduction/00-introduction.md)
 * [Teoria das Categorias](01-category-theory/01-category-theory.md)
