@@ -1,4 +1,6 @@
-# Functional Book ES6
+# Introdução
+
+## O que é FP em linguagens como JS?
 
 A programação funcional consiste em uma abordagem distinta da convencional programação orientada a obejtos para o desenvolvimento de aplicaçoes e software.
 Ressaltando que POO é bastante util ainda hoje e seu ensino e utilizacao ainda é  bastante comum atualmente, reafirmamos a sua importancia contudo salientando suas limitações. Podemos citar a implantacao do computação paralela utilizando POO tende a ser demasiadamente custosa e dificil, por os estados podem ser alterados bem como sofrer efeitos colaterais.
@@ -176,4 +178,13 @@ Além disso, o fluxo de controle não é "uma sentada de cima pra baixo" como ac
 Este exemplo não nos apresentou, mas nem de longe, o que a programação funcional com JavaScript tem a oferecer. Veremos exemplos ainda mais poderosos da abordagem funcional.
 
 
+Mais sobre javascript:
+- Foi criada como OOP porém permite HOF
+https://github.com/hemanth/functional-programming-jargon
+
 [Fonte](https://gist.github.com/lukkaslt/1c2514d4e241498bf81d24ac2da97986)
+
+- [ ] Definição de Funcional
+- [ ] Paradigmas do JS
+- [ ] Vantagens
+- [ ] Exemplos real world
