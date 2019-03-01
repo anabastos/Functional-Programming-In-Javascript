@@ -1,5 +1,75 @@
 # O que é pureza?
 
+Como assim?
+Talvez você não se recorde mas funções matemáticas são um conteúdo passado em escolas na quarta série.
+Se lembra disto?
+Em funções matematicas na escola aprendemos que uma função recebe um argumento(x no caso). No caso da função f(x) = x * x multiplicamos o que recebemos por si mesmo. Então caso x é 1 temos uma imagem y que equivale a 1(1 * 1 = 1), e assim por diante. 
+https://speakerdeck.com/anabastos/javascript-funcional-front-end-campinas?slide=8
+
+Com isso podemos desenhar uma reta num grafico demontrando as possíveis entradas e saidas.
+É importante lembrar que cada função tem um dominio e imagem. Em um dominio, ou "input" de 1 a 4 temos como "output" uma imagem com os valores 2, 4, 9, 16 para suas respectivas contas. Não importa quantas vezes eu faça 1 * 1 pois a resposta SEMPRE será 1. 
+https://speakerdeck.com/anabastos/javascript-funcional-front-end-campinas?slide=9
+
+Caso 1 * 1 em algum momento dê 2 NAO TEMOS UMA FUNCAO MATEMATICA.
+
+https://speakerdeck.com/anabastos/javascript-funcional-front-end-campinas?slide=11
+
+Caso a função seja por exemplo, f(x) = ---- se o input de x for _ ou _ teremos o mesmo output. Isso é ok pois ainda assim temos uma função matematica.
+https://speakerdeck.com/anabastos/javascript-funcional-front-end-campinas?slide=10
+
+Ou seja, uma função pura é exatamente o que se espera de uma função matematica comum:
+- Sempre recebem algo
+- Sempre retornam algo
+- Nunca mutam algo fora do escopo da propria função
+- Para o mesmo input sempre retornam o mesmo output
+
+```javascript
+let taxa = 10
+
+function valorTotal(valor) {
+  return valor + taxa
+}
+
+valorTotal(10) // 20
+taxa += 1;
+valorTotal(10) // 21 :(
+```
+
+Funções nunca devem depender do contexto em que elas estão
+```javascript
+let taxa = 10
+
+function valorTotal(valor) {
+  return valor + taxa
+}
+
+valorTotal(10) // 20
+taxa += 1;
+valorTotal(10) // 21 :(
+```
+
+Uma opção correta seria receber mais argumentos:
+```javascript
+function valorTotal(valor, taxa) {
+  return valor + taxa
+}
+```
+
+Poxa mas em função matematica não recebemos apenas uma função como argumento?
+Em matematica vimos que dá para criar funções em termos de outras funções e compor funções(f ∘ g).
+Algo como:
+f(x) = x + g(y).
+Veremos isso no proximo capitulo de currying.
+
+Here's a (non-exhaustive) list of FP features:
+
+First-Class Functions
+High-Order Functions
+Pure Functions
+Closures
+Immutable State
+
+
 ## Pure functions
 Uma Função Pura retorna o valor computado apenas com argumentos a ela passados. Com ela evitamos o chamado efeito colateral, ou seja, não tocamos em variáeis externas nem no estado global. Em outras palavras, ela deve manter tais argumentos intactos. Podemos concluir que: a função pura apenas retorna valores.
 
