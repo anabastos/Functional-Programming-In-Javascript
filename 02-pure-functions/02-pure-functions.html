@@ -358,6 +358,62 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="o-que-&#xE9;-pureza">O que &#xE9; pureza?</h1>
+<p>Como assim?
+Talvez voc&#xEA; n&#xE3;o se recorde mas fun&#xE7;&#xF5;es matem&#xE1;ticas s&#xE3;o um conte&#xFA;do passado em escolas na quarta s&#xE9;rie.
+Se lembra disto?
+Em fun&#xE7;&#xF5;es matematicas na escola aprendemos que uma fun&#xE7;&#xE3;o recebe um argumento(x no caso). No caso da fun&#xE7;&#xE3;o f(x) = x <em> x multiplicamos o que recebemos por si mesmo. Ent&#xE3;o caso x &#xE9; 1 temos uma imagem y que equivale a 1(1 </em> 1 = 1), e assim por diante. 
+<a href="https://speakerdeck.com/anabastos/javascript-funcional-front-end-campinas?slide=8" target="_blank">https://speakerdeck.com/anabastos/javascript-funcional-front-end-campinas?slide=8</a></p>
+<p>Com isso podemos desenhar uma reta num grafico demontrando as poss&#xED;veis entradas e saidas.
+&#xC9; importante lembrar que cada fun&#xE7;&#xE3;o tem um dominio e imagem. Em um dominio, ou &quot;input&quot; de 1 a 4 temos como &quot;output&quot; uma imagem com os valores 2, 4, 9, 16 para suas respectivas contas. N&#xE3;o importa quantas vezes eu fa&#xE7;a 1 * 1 pois a resposta SEMPRE ser&#xE1; 1. 
+<a href="https://speakerdeck.com/anabastos/javascript-funcional-front-end-campinas?slide=9" target="_blank">https://speakerdeck.com/anabastos/javascript-funcional-front-end-campinas?slide=9</a></p>
+<p>Caso 1 * 1 em algum momento d&#xEA; 2 NAO TEMOS UMA FUNCAO MATEMATICA.</p>
+<p><a href="https://speakerdeck.com/anabastos/javascript-funcional-front-end-campinas?slide=11" target="_blank">https://speakerdeck.com/anabastos/javascript-funcional-front-end-campinas?slide=11</a></p>
+<p>Caso a fun&#xE7;&#xE3;o seja por exemplo, f(x) = ---- se o input de x for <em> ou </em> teremos o mesmo output. Isso &#xE9; ok pois ainda assim temos uma fun&#xE7;&#xE3;o matematica.
+<a href="https://speakerdeck.com/anabastos/javascript-funcional-front-end-campinas?slide=10" target="_blank">https://speakerdeck.com/anabastos/javascript-funcional-front-end-campinas?slide=10</a></p>
+<p>Ou seja, uma fun&#xE7;&#xE3;o pura &#xE9; exatamente o que se espera de uma fun&#xE7;&#xE3;o matematica comum:</p>
+<ul>
+<li>Sempre recebem algo</li>
+<li>Sempre retornam algo</li>
+<li>Nunca mutam algo fora do escopo da propria fun&#xE7;&#xE3;o</li>
+<li>Para o mesmo input sempre retornam o mesmo output</li>
+</ul>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> taxa = <span class="hljs-number">10</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">valorTotal</span>(<span class="hljs-params">valor</span>) </span>{
+  <span class="hljs-keyword">return</span> valor + taxa
+}
+
+valorTotal(<span class="hljs-number">10</span>) <span class="hljs-comment">// 20</span>
+taxa += <span class="hljs-number">1</span>;
+valorTotal(<span class="hljs-number">10</span>) <span class="hljs-comment">// 21 :(</span>
+</code></pre>
+<p>Fun&#xE7;&#xF5;es nunca devem depender do contexto em que elas est&#xE3;o</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> taxa = <span class="hljs-number">10</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">valorTotal</span>(<span class="hljs-params">valor</span>) </span>{
+  <span class="hljs-keyword">return</span> valor + taxa
+}
+
+valorTotal(<span class="hljs-number">10</span>) <span class="hljs-comment">// 20</span>
+taxa += <span class="hljs-number">1</span>;
+valorTotal(<span class="hljs-number">10</span>) <span class="hljs-comment">// 21 :(</span>
+</code></pre>
+<p>Uma op&#xE7;&#xE3;o correta seria receber mais argumentos:</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">valorTotal</span>(<span class="hljs-params">valor, taxa</span>) </span>{
+  <span class="hljs-keyword">return</span> valor + taxa
+}
+</code></pre>
+<p>Poxa mas em fun&#xE7;&#xE3;o matematica n&#xE3;o recebemos apenas uma fun&#xE7;&#xE3;o como argumento?
+Em matematica vimos que d&#xE1; para criar fun&#xE7;&#xF5;es em termos de outras fun&#xE7;&#xF5;es e compor fun&#xE7;&#xF5;es(f &#x2218; g).
+Algo como:
+f(x) = x + g(y).
+Veremos isso no proximo capitulo de currying.</p>
+<p>Here&apos;s a (non-exhaustive) list of FP features:</p>
+<p>First-Class Functions
+High-Order Functions
+Pure Functions
+Closures
+Immutable State</p>
 <h2 id="pure-functions">Pure functions</h2>
 <p>Uma Fun&#xE7;&#xE3;o Pura retorna o valor computado apenas com argumentos a ela passados. Com ela evitamos o chamado efeito colateral, ou seja, n&#xE3;o tocamos em vari&#xE1;eis externas nem no estado global. Em outras palavras, ela deve manter tais argumentos intactos. Podemos concluir que: a fun&#xE7;&#xE3;o pura apenas retorna valores.</p>
 <p>Exemplo disso &#xE9; uma fun&#xE7;&#xE3;o matem&#xE1;tica. A fun&#xE7;&#xE3;o <code>Math.sqrt(4)</code> sempre retornar&#xE1; 2, n&#xE3;o usar&#xE1; nenhuma informa&#xE7;&#xE3;o &quot;obscura&quot;, como configura&#xE7;&#xF5;es ou estado, e nunca causar&#xE1; efeitos colaterais.</p>
@@ -462,7 +518,7 @@ We can replace the entire expression with a numerical constant and memoize it.</
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Funções puras","level":"1.4","depth":1,"next":{"title":"Currying & Parcial Application","level":"1.5","depth":1,"path":"03-currying-vs-partial-application/03-currying-vs-partial-application.md","ref":"03-currying-vs-partial-application/03-currying-vs-partial-application.md","articles":[]},"previous":{"title":"Lambda Calculus","level":"1.3","depth":1,"path":"01-λ-calculus/01-λ-calculus.md","ref":"01-λ-calculus/01-λ-calculus.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"02-pure-functions/02-pure-functions.md","mtime":"2019-02-03T18:32:08.442Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2019-02-03T18:35:17.350Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Funções puras","level":"1.4","depth":1,"next":{"title":"Currying & Parcial Application","level":"1.5","depth":1,"path":"03-currying-vs-partial-application/03-currying-vs-partial-application.md","ref":"03-currying-vs-partial-application/03-currying-vs-partial-application.md","articles":[]},"previous":{"title":"Lambda Calculus","level":"1.3","depth":1,"path":"01-λ-calculus/01-λ-calculus.md","ref":"01-λ-calculus/01-λ-calculus.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"02-pure-functions/02-pure-functions.md","mtime":"2019-03-01T01:31:56.024Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2019-03-01T16:28:46.631Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
