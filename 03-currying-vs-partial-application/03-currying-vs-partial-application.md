@@ -3,6 +3,9 @@
 ## Currying
 
 Como vimos no [capitulo 1](https://github.com/anabastos/Functional-Book-ES6/blob/master/02-%CE%BB-calculus/02-%CE%BB-calculus.md) a composição de funções recebe apenas um parametro que são aplicados um de cada vez, por isso ao programarmos em linguagens puramente funcional geralmente podemos usar uma função com multiplos parametros pois o proprio compilar reescreve em novas funções de apenas um parametros compostas entre si. Isso é o que chamamos de **"Currying"**, palavra que veio do Haskell Curry, um matematico que foi de grande influencia no desenvolvimento de linguagens funcionais.
+
+Voltando a ponte de funções matematicas, vimos na escola blablabal composição de função.
+
 Porém, quando usamos multiplos argumentos no js temos algo parecido com isso:
 
 ```javascript
