@@ -360,6 +360,62 @@
                                 <h1 id="fugindo-de-classes">Fugindo de classes</h1>
 <h2 id="utilizando-objetos-literais-e-fun&#xE7;&#xF5;es">Utilizando objetos literais e fun&#xE7;&#xF5;es</h2>
 <h2 id="closure">Closure</h2>
+<p>Closure &#xE9; um metodo interessante para manter estado de uma fun&#xE7;&#xE3;o javascript.</p>
+<p>&#x201C;Writing in ECMAScript language without understanding closure is like writing Java without understanding classes&#x201D;&#x200A;&#x2014;&#x200A;Douglas Crockford.</p>
+<p>JavaScript is a lexical scoping language. This means, inheritance flows inwards. A variable outside a function is available for usage within a function but not the other way around.</p>
+<p>Javascript tem escopo de linguagem lexico. Ou seja, heran&#xE7;a flui de dentro pra fora, sendo assim, uma vari&#xE1;vel fora de fun&#xE7;&#xE3;o est&#xE1; dispon&#xED;vel dentro da fun&#xE7;&#xE3;o enquanto vari&#xE1;veis dentro da fun&#xE7;&#xE3;o est&#xE3;o dispon&#xED;veis apenas dentro da propria fun&#xE7;&#xE3;o.
+Quando colocamos codigo dentro de fun&#xE7;&#xF5;es javascript fechamos o seu escopo e tornamos a vari&#xE1;vel passada como argumento como independente.</p>
+<p>No exemplo a seguir temos uma fun&#xE7;&#xE3;o dentro de uma fun&#xE7;&#xE3;o closure em que retornamos a fun&#xE7;&#xE3;o de dentro:</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">closure</span>(<span class="hljs-params">x</span>) </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">increase</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + x;
+    }
+    <span class="hljs-keyword">return</span> increase;
+}
+
+<span class="hljs-built_in">console</span>.log(closure(<span class="hljs-number">3</span>));
+</code></pre>
+<p>Isso pode ser verificado no pr&#xF3;prio navegador:
+<a href="https://cdn-images-1.medium.com/max/1600/1*QGWZ21n2CUD_DwIWMprYBQ.jpeg" target="_blank">https://cdn-images-1.medium.com/max/1600/1*QGWZ21n2CUD_DwIWMprYBQ.jpeg</a></p>
+<p>E ai vem a pergunta, se uma closure &#xE9; o uso de uma vari&#xE1;vel fora da pr&#xF3;pria fun&#xE7;&#xE3;o, pq este exemplo n&#xE3;o &#xE9; uma closure?</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">closure</span>(<span class="hljs-params">x</span>) </span>{
+
+    <span class="hljs-keyword">const</span> increased = <span class="hljs-number">1</span> + x;
+    <span class="hljs-keyword">return</span> increased;
+}
+
+<span class="hljs-built_in">console</span>.log(closure(<span class="hljs-number">3</span>));
+</code></pre>
+<p>N&#xE3;o &#xE9; por causa da forma como o Javascript avalia essa express&#xE3;o. O escopo da fun&#xE7;&#xE3;o &#xE9; criado assim que a mem&#xF3;ria &#xE9; alocada a ele. Este processo acontece at&#xE9; que a mem&#xF3;ria alocada para a fun&#xE7;&#xE3;o ser liberda ent&#xE3;o qualquer valor criado &#xE9; perdido.</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">closure</span>(<span class="hljs-params">x</span>) </span>{ <span class="hljs-comment">// Fun&#xE7;&#xE3;o &#xE9; chamda e mem&#xF3;ria &#xE9; alocada para ela.</span>
+
+    <span class="hljs-keyword">const</span> increased = <span class="hljs-number">1</span> + x; <span class="hljs-comment">// Express&#xE3;o &#xE9; executada.</span>
+    <span class="hljs-keyword">return</span> increased; <span class="hljs-comment">// No fim da fun&#xE7;&#xE3;o a mem&#xF3;ria &#xE9; liberada.</span>
+} 
+
+<span class="hljs-built_in">console</span>.log(closure(<span class="hljs-number">3</span>)); <span class="hljs-comment">// Processo ocorre sempre que a fun&#xE7;&#xE3;o &#xE9; chamada.</span>
+</code></pre>
+<p>O ponto &#xE9;: quando criamos uma fun&#xE7;&#xE3;o dentro de outra fun&#xE7;&#xE3;o criamos um novo escopo que n&#xE3;o &#xE9; desalocado ao fim da execu&#xE7;&#xE3;o da fun&#xE7;&#xE3;o podendo guardar contextos.
+Desta forma podemos criar um n&#xFA;mero ilimitado de inst&#xE2;ncias de fun&#xE7;&#xE3;o guardando o contexto de seus valores passados.</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">closure</span>(<span class="hljs-params">x</span>) </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">increase</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + x;
+    }
+    <span class="hljs-keyword">return</span> increase;
+}
+
+<span class="hljs-keyword">const</span> counting = closure(<span class="hljs-number">0</span>);
+
+<span class="hljs-built_in">console</span>.log(counting.increase()); <span class="hljs-comment">// return 1</span>
+<span class="hljs-built_in">console</span>.log(counting.increase()); <span class="hljs-comment">// return 2</span>
+</code></pre>
+<p>Ou seja, closures s&#xE3;o apenas fun&#xE7;&#xF5;es com dados preservados. QUando criamos uma closure, estamos falando para o Javascript lembrar o estado de coisas dentro de sua fun&#xE7;&#xE3;o, e suas unicas variaveis usadas s&#xE3;o consideradas &apos;closures&apos;.
+Isso &#xE9; particularmente util principalmente porque closures s&#xE3;o basicamente fun&#xE7;&#xF5;es com estado, similar a classes que teriam variaveis privadas.
+As variaveis s&#xE3;o privadas porque fun&#xE7;&#xF5;es externas n&#xE3;o podem acessa-las com uma chamadas explicita. Isso permite que uma fun&#xE7;&#xE3;o inteira tenha conte&#xFA;do proprio e se proteja contra mudan&#xE7;as indesejadas.</p>
+<p>Closures portanto s&#xE3;o uma forma sucinta de modularizar sem a necessidade de cria&#xE7;&#xE3;o de classes. Por&#xE9;m permitindo a replicabilidade do codigo e reduzindo o numero de escopos globais necessarios. </p>
+<p>Sendo assim, closures s&#xE3;o mais do que criar fun&#xE7;&#xF5;es dentro de outras fun&#xE7;&#xF5;es. &#xC9; uma tecnica usada para criar variaveis que s&#xE3;o protegidas de mudan&#xE7;as externas, isoladas do resto da aplica&#xE7;&#xE3;o e com estado persistente.</p>
 <h2 id="lenses">Lenses</h2>
 
                                 
@@ -404,7 +460,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Não usando classes","level":"1.12","depth":1,"next":{"title":"Programação tacita","level":"1.13","depth":1,"path":"11-tacit/11-tacit.md","ref":"11-tacit/11-tacit.md","articles":[]},"previous":{"title":"Modulos, Async, contratos, error handling","level":"1.11","depth":1,"path":"09-modules-and-async/09-modules-and-async.md","ref":"09-modules-and-async/09-modules-and-async.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"10-classes/10-classes.md","mtime":"2019-02-03T18:24:51.318Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2019-03-02T20:03:14.834Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Não usando classes","level":"1.12","depth":1,"next":{"title":"Programação tacita","level":"1.13","depth":1,"path":"11-tacit/11-tacit.md","ref":"11-tacit/11-tacit.md","articles":[]},"previous":{"title":"Modulos, Async, contratos, error handling","level":"1.11","depth":1,"path":"09-modules-and-async/09-modules-and-async.md","ref":"09-modules-and-async/09-modules-and-async.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"10-classes/10-classes.md","mtime":"2019-03-12T15:25:04.083Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2019-03-12T15:25:11.574Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
